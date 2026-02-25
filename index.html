@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ishita Rastogi</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=Outfit:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #fafaf7;
+        --card: #ffffff;
+        --ink: #161616;
+        --sub: #555;
+        --muted: #999;
+        --warm: #c4956a;
+        --border: #e8e4dd;
+        --border-light: rgba(0, 0, 0, 0.04);
+        --tag-bg: #edeae4;
+        --serif: "Fraunces", Georgia, serif;
+        --sans: "Outfit", -apple-system, sans-serif;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+        -webkit-font-smoothing: antialiased;
+      }
+      body {
+        font-family: var(--sans);
+        background: var(--bg);
+        color: var(--ink);
+        line-height: 1.6;
+      }
+      ::selection {
+        background: var(--ink);
+        color: var(--bg);
+      }
+
+      /* TICKER */
+      .ticker-wrap {
+        background: var(--ink);
+        overflow: hidden;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        position: relative;
+      }
+      .ticker {
+        display: flex;
+        white-space: nowrap;
+        animation: scroll 28s linear infinite;
+      }
+      .ticker span {
+        font-size: 0.68rem;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        color: rgba(250, 250, 247, 0.5);
+        padding: 0 28px;
+      }
+      .ticker span em {
+        font-style: normal;
+        color: var(--warm);
+      }
+      @keyframes scroll {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-50%);
+        }
+      }
+
+      /* NAV */
+      nav {
+        position: fixed;
+        top: 32px;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        background: rgba(250, 250, 247, 0.88);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        border-bottom: 1px solid var(--border-light);
+      }
+      .nav-inner {
+        max-width: 880px;
+        margin: 0 auto;
+        padding: 0 28px;
+        height: 52px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .nav-logo {
+        font-family: var(--serif);
+        font-size: 1.1rem;
+        font-weight: 400;
+        color: var(--ink);
+        text-decoration: none;
+      }
+      .nav-right {
+        display: flex;
+        gap: 22px;
+        align-items: center;
+      }
+      .nav-right > a {
+        font-size: 0.74rem;
+        font-weight: 500;
+        color: var(--muted);
+        text-decoration: none;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        transition: color 0.2s;
+      }
+      .nav-right > a:hover {
+        color: var(--ink);
+      }
+      .socials {
+        display: flex;
+        gap: 12px;
+        margin-left: 6px;
+        padding-left: 14px;
+        border-left: 1px solid var(--border);
+      }
+      .socials a {
+        color: var(--muted);
+        display: flex;
+        transition: color 0.2s;
+      }
+      .socials a:hover {
+        color: var(--ink);
+      }
+      .socials svg {
+        width: 14px;
+        height: 14px;
+      }
+
+      /* HERO */
+      .hero {
+        max-width: 880px;
+        margin: 0 auto;
+        padding: 152px 28px 48px;
+      }
+      .hey {
+        font-size: 0.84rem;
+        color: var(--warm);
+        font-weight: 500;
+        margin-bottom: 10px;
+        opacity: 0;
+        animation: up 0.5s ease 0.08s forwards;
+      }
+      .hero h1 {
+        font-family: var(--serif);
+        font-size: clamp(2rem, 4.5vw, 2.9rem);
+        font-weight: 400;
+        line-height: 1.15;
+        letter-spacing: -0.01em;
+        max-width: 560px;
+        opacity: 0;
+        animation: up 0.5s ease 0.16s forwards;
+      }
+      .hero h1 em {
+        font-style: italic;
+      }
+      .bio {
+        margin-top: 16px;
+        font-size: 0.9rem;
+        font-weight: 300;
+        color: var(--sub);
+        max-width: 440px;
+        line-height: 1.6;
+        opacity: 0;
+        animation: up 0.5s ease 0.26s forwards;
+      }
+
+      /* TAGS (clickable filters) */
+      .tags {
+        margin-top: 20px;
+        display: flex;
+        gap: 7px;
+        flex-wrap: wrap;
+        opacity: 0;
+        animation: up 0.5s ease 0.34s forwards;
+      }
+      .tag {
+        font-size: 0.7rem;
+        font-weight: 500;
+        color: var(--sub);
+        padding: 4px 11px;
+        background: var(--tag-bg);
+        border-radius: 14px;
+        cursor: pointer;
+        transition: all 0.2s;
+        border: 1.5px solid transparent;
+        user-select: none;
+      }
+      .tag:hover {
+        border-color: var(--border);
+        color: var(--ink);
+      }
+      .tag.active {
+        background: var(--ink);
+        color: var(--bg);
+        border-color: var(--ink);
+      }
+
+      /* EXPERIENCE */
+      .exp-section {
+        margin-top: 36px;
+        opacity: 0;
+        animation: up 0.5s ease 0.42s forwards;
+      }
+      .exp-label {
+        font-size: 0.62rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 12px;
+      }
+      .exp-grid {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .exp-card {
+        flex: 1;
+        min-width: 160px;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 16px 18px;
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.2s, box-shadow 0.2s;
+      }
+      .exp-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
+      }
+      .exp-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: var(--warm);
+        border-radius: 12px 12px 0 0;
+      }
+      .ec-co {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--ink);
+        margin-bottom: 2px;
+      }
+      .ec-role {
+        font-size: 0.74rem;
+        font-weight: 400;
+        color: var(--sub);
+      }
+      .ec-badge {
+        display: inline-block;
+        font-size: 0.58rem;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--warm);
+        background: rgba(196, 149, 106, 0.1);
+        padding: 2px 7px;
+        border-radius: 4px;
+        margin-top: 6px;
+      }
+
+      .hr {
+        max-width: 880px;
+        margin: 0 auto;
+        padding: 0 28px;
+      }
+      .hr hr {
+        border: none;
+        height: 1px;
+        background: var(--border);
+      }
+
+      /* SECTION */
+      .section {
+        max-width: 880px;
+        margin: 0 auto;
+        padding: 48px 28px;
+      }
+      .sec-title {
+        font-family: var(--serif);
+        font-size: 1.4rem;
+        font-weight: 400;
+        margin-bottom: 28px;
+      }
+
+      /* FILTER NOTICE */
+      .filter-notice {
+        display: none;
+        margin-bottom: 20px;
+        padding: 10px 14px;
+        background: rgba(196, 149, 106, 0.08);
+        border-radius: 8px;
+        font-size: 0.78rem;
+        color: var(--sub);
+        align-items: center;
+        justify-content: space-between;
+      }
+      .filter-notice.show {
+        display: flex;
+      }
+      .filter-clear {
+        font-size: 0.7rem;
+        font-weight: 500;
+        color: var(--warm);
+        cursor: pointer;
+        text-decoration: underline;
+        background: none;
+        border: none;
+        font-family: var(--sans);
+      }
+
+      /* ARTICLES */
+      .pub {
+        margin-bottom: 32px;
+        transition: opacity 0.3s, max-height 0.3s;
+      }
+      .pub:last-child {
+        margin-bottom: 0;
+      }
+      .pub.hidden {
+        opacity: 0;
+        max-height: 0;
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+      }
+      .pub-label {
+        font-size: 0.64rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 8px;
+        padding-bottom: 7px;
+        border-bottom: 1px solid var(--border-light);
+      }
+      .a-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
+      }
+      .a-item {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 9px 10px;
+        border-radius: 6px;
+        text-decoration: none;
+        color: inherit;
+        transition: all 0.18s;
+      }
+      .a-item.hidden {
+        display: none;
+      }
+      .a-item:hover {
+        background: var(--card);
+        transform: translateX(3px);
+      }
+      .a-title {
+        font-family: var(--serif);
+        font-size: 0.96rem;
+        font-weight: 400;
+        line-height: 1.35;
+        flex: 1;
+      }
+      .a-arrow {
+        font-size: 0.78rem;
+        color: var(--muted);
+        opacity: 0;
+        transform: translateX(-4px);
+        transition: all 0.2s;
+      }
+      .a-item:hover .a-arrow {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      /* DIAGRAMS */
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+      }
+      .d-card {
+        background: var(--card);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        border-radius: 10px;
+        overflow: hidden;
+        transition: transform 0.3s, box-shadow 0.3s;
+        cursor: pointer;
+      }
+      .d-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 16px rgba(0, 0, 0, 0.05);
+      }
+      .d-img {
+        aspect-ratio: 16/10;
+        background: var(--tag-bg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        position: relative;
+      }
+      .d-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.4s;
+      }
+      .d-card:hover .d-img img {
+        transform: scale(1.03);
+      }
+      .d-info {
+        padding: 10px 12px;
+      }
+      .d-info h4 {
+        font-family: var(--serif);
+        font-size: 0.88rem;
+        font-weight: 400;
+        line-height: 1.3;
+      }
+      .d-info p {
+        font-size: 0.7rem;
+        color: var(--muted);
+        margin-top: 2px;
+      }
+
+      /* LIGHTBOX */
+      .lb {
+        position: fixed;
+        inset: 0;
+        z-index: 200;
+        background: rgba(8, 8, 8, 0.92);
+        backdrop-filter: blur(12px);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 44px;
+      }
+      .lb.on {
+        display: flex;
+      }
+      .lb img {
+        max-width: 92%;
+        max-height: 85vh;
+        border-radius: 5px;
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+      }
+      .lb-x {
+        position: absolute;
+        top: 16px;
+        right: 20px;
+        width: 34px;
+        height: 34px;
+        border: none;
+        background: rgba(255, 255, 255, 0.07);
+        border-radius: 50%;
+        color: #fff;
+        font-size: 0.95rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s;
+      }
+      .lb-x:hover {
+        background: rgba(255, 255, 255, 0.14);
+      }
+      .lb-n {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 40px;
+        height: 40px;
+        border: none;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 50%;
+        color: rgba(255, 255, 255, 0.55);
+        font-size: 1.1rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+      }
+      .lb-n:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: #fff;
+      }
+      .lb-p {
+        left: 18px;
+      }
+      .lb-nxt {
+        right: 18px;
+      }
+
+      /* CTA */
+      .cta-wrap {
+        max-width: 880px;
+        margin: 0 auto;
+        padding: 0 28px 48px;
+      }
+      .cta {
+        background: var(--ink);
+        border-radius: 10px;
+        padding: 24px 28px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+      .cta p {
+        font-family: var(--serif);
+        font-size: 1.05rem;
+        color: var(--bg);
+      }
+      .cta-links {
+        display: flex;
+        gap: 8px;
+      }
+      .cta-links a {
+        padding: 6px 14px;
+        font-size: 0.74rem;
+        font-weight: 500;
+        color: var(--bg);
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        border-radius: 5px;
+        text-decoration: none;
+        transition: all 0.2s;
+      }
+      .cta-links a:hover {
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      footer {
+        max-width: 880px;
+        margin: 0 auto;
+        padding: 24px 28px 44px;
+        border-top: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      footer p {
+        font-size: 0.72rem;
+        color: var(--muted);
+      }
+      .f-links {
+        display: flex;
+        gap: 14px;
+      }
+      .f-links a {
+        font-size: 0.72rem;
+        color: var(--sub);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      .f-links a:hover {
+        color: var(--ink);
+      }
+
+      @keyframes up {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .fi {
+        opacity: 0;
+        transform: translateY(8px);
+        transition: all 0.4s ease;
+      }
+      .fi.v {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (max-width: 640px) {
+        .ticker-wrap {
+          height: 28px;
+        }
+        .ticker span {
+          font-size: 0.62rem;
+          padding: 0 20px;
+        }
+        nav {
+          top: 28px;
+        }
+        .hero {
+          padding: 136px 20px 40px;
+        }
+        .section {
+          padding: 40px 20px;
+        }
+        .socials {
+          display: none;
+        }
+        .nav-inner {
+          padding: 0 20px;
+        }
+        .exp-grid {
+          flex-direction: column;
+        }
+        .grid {
+          grid-template-columns: 1fr;
+        }
+        .cta-wrap {
+          padding: 0 20px 40px;
+        }
+        .cta {
+          flex-direction: column;
+          text-align: center;
+          padding: 20px;
+        }
+        footer {
+          flex-direction: column;
+          gap: 8px;
+          padding: 20px 20px 32px;
+        }
+        .lb-n {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- TICKER -->
+    <div class="ticker-wrap" id="ticker-top">
+      <div class="ticker">
+        <span>USDC settled <em>$26.2T</em> in 2025 — more than Visa</span>
+        <span>Solana processes <em>65,000 TPS</em> — Nasdaq does 70,000</span>
+        <span>Stablecoin market cap hit <em>$210B</em> — and counting</span>
+        <span>PayFi will eat TradFi for breakfast ☕</span>
+        <span>Tokenized treasuries crossed <em>$2.5B</em> on-chain</span>
+        <span
+          >Solana finality: <em>400ms</em> → Alpenglow: <em>150ms</em> → your
+          bank: <em>3 business days</em></span
+        >
+        <span>The future of payments is a block, not a batch</span>
+        <span>USDC settled <em>$26.2T</em> in 2025 — more than Visa</span>
+        <span>Solana processes <em>65,000 TPS</em> — Nasdaq does 70,000</span>
+        <span>Stablecoin market cap hit <em>$210B</em> — and counting</span>
+        <span>PayFi will eat TradFi for breakfast ☕</span>
+        <span>Tokenized treasuries crossed <em>$2.5B</em> on-chain</span>
+        <span
+          >Solana finality: <em>400ms</em> → Alpenglow: <em>150ms</em> → your
+          bank: <em>3 business days</em></span
+        >
+        <span>The future of payments is a block, not a batch</span>
+      </div>
+    </div>
+
+    <!-- NAV -->
+    <nav>
+      <div class="nav-inner">
+        <a href="#" class="nav-logo">Ishita Rastogi</a>
+        <div class="nav-right">
+          <a href="#articles">Articles</a>
+          <a href="#diagrams">Diagrams</a>
+          <div class="socials">
+            <a href="https://x.com/Ishita_30" target="_blank"
+              ><svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+                /></svg
+            ></a>
+            <a
+              href="https://www.linkedin.com/in/ishitarastogii/"
+              target="_blank"
+              ><svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+                /></svg
+            ></a>
+            <a href="https://github.com/ishitarastogi" target="_blank"
+              ><svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+                /></svg
+            ></a>
+            <a href="https://substack.com/@ishitarastogi" target="_blank"
+              ><svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"
+                /></svg
+            ></a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hey">hey, i'm ishita 👋</div>
+      <h1>I write about crypto payments, stablecoins & <em>Solana.</em></h1>
+      <p class="bio">
+        Research Analyst exploring how crypto rails are replacing traditional
+        finance — from stablecoin settlements to tokenized assets.
+      </p>
+
+      <!-- CLICKABLE FILTER TAGS -->
+      <div class="tags">
+        <span class="tag">Crypto Payments</span>
+        <span class="tag">Stablecoins</span>
+        <span class="tag">Solana</span>
+        <span class="tag">Tokenization</span>
+        <span class="tag">DeFi</span>
+        <span class="tag">L2s</span>
+      </div>
+
+      <!-- EXPERIENCE -->
+      <div class="exp-section">
+        <div class="exp-label">Where I've worked</div>
+        <div class="exp-grid">
+          <div class="exp-card">
+            <div class="ec-co">Hazeflow</div>
+            <div class="ec-role">Research Analyst</div>
+            <span class="ec-badge">current</span>
+          </div>
+          <div class="exp-card">
+            <div class="ec-co">Gelato Network</div>
+            <div class="ec-role">Technical Writer</div>
+          </div>
+          <div class="exp-card">
+            <div class="ec-co">Nethermind</div>
+            <div class="ec-role">DeFi Analyst</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="hr"><hr /></div>
+
+    <!-- ARTICLES -->
+    <section class="section" id="articles">
+      <h2 class="sec-title fi">Writing</h2>
+
+      <!-- Filter notice -->
+      <div class="filter-notice" id="filter-notice">
+        <span>Filtering by: <strong id="filter-label"></strong></span>
+        <button class="filter-clear" onclick="clearFilter()">Show all</button>
+      </div>
+
+      <div class="pub fi">
+        <div class="pub-label">Hazeflow</div>
+        <div class="a-list">
+          <a
+            href="https://hazeflow.xyz/blog/raiku-solving-solana-s-biggest-pain-points"
+            target="_blank"
+            class="a-item"
+            data-tags="solana defi"
+          >
+            <span class="a-title"
+              >Raiku: Solving Solana's Biggest Pain Points</span
+            ><span class="a-arrow">→</span>
+          </a>
+          <a
+            href="https://hazeflow.xyz/blog/are-l2s-really-secured-by-ethereum"
+            target="_blank"
+            class="a-item"
+            data-tags="l2s"
+          >
+            <span class="a-title">Are L2s Really Secured by Ethereum?</span
+            ><span class="a-arrow">→</span>
+          </a>
+          <a
+            href="https://hazeflow.xyz/blog/the-state-of-confidential-ai-in-2025-who-wins-and-who-loses"
+            target="_blank"
+            class="a-item"
+            data-tags="defi"
+          >
+            <span class="a-title">The State of Confidential AI in 2025</span
+            ><span class="a-arrow">→</span>
+          </a>
+          <a
+            href="https://hazeflow.xyz/blog/why-are-based-rollups-the-only-future-of-ethereum"
+            target="_blank"
+            class="a-item"
+            data-tags="l2s"
+          >
+            <span class="a-title"
+              >Why Are Based Rollups the Only Future of Ethereum?</span
+            ><span class="a-arrow">→</span>
+          </a>
+          <a
+            href="https://hazeflow.xyz/blog/succinct-labs-what-is-the-difference-between-sp1-and-spn"
+            target="_blank"
+            class="a-item"
+            data-tags="l2s"
+          >
+            <span class="a-title">Succinct Labs: SP1 vs SPN</span
+            ><span class="a-arrow">→</span>
+          </a>
+          <a
+            href="https://hazeflow.xyz/blog/proof-generation-on-succinct-and-risc-zero"
+            target="_blank"
+            class="a-item"
+            data-tags="l2s"
+          >
+            <span class="a-title"
+              >Proof Generation on Succinct and RISC Zero</span
+            ><span class="a-arrow">→</span>
+          </a>
+          <a
+            href="https://hazeflow.xyz/blog/blobonomics-the-new-attack-surface-how-ethereum-is-hardening-its-da-layer"
+            target="_blank"
+            class="a-item"
+            data-tags="l2s"
+          >
+            <span class="a-title"
+              >Blobonomics: How Ethereum Is Hardening Its DA Layer</span
+            ><span class="a-arrow">→</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- <div class="pub fi">
+        <div class="pub-label">Raiku — Solana Research</div>
+        <div class="a-list">
+          <a
+            href="https://www.raiku.com/blog/solana-will-beat-tradfi"
+            target="_blank"
+            class="a-item"
+            data-tags="solana payments defi"
+          >
+            <span class="a-title">Solana Will Beat TradFi</span
+            ><span class="a-arrow">→</span>
+          </a>
+          <a
+            href="https://www.raiku.com/blog/how-does-solana-keep-fees-low"
+            target="_blank"
+            class="a-item"
+            data-tags="solana payments"
+          >
+            <span class="a-title">How Does Solana Keep Fees Low?</span
+            ><span class="a-arrow">→</span>
+          </a>
+          <a
+            href="https://www.raiku.com/blog/alpenglow-the-solana-upgrade-that-rivals-nasdaq"
+            target="_blank"
+            class="a-item"
+            data-tags="solana defi"
+          >
+            <span class="a-title"
+              >Alpenglow: The Solana Upgrade That Rivals NASDAQ</span
+            ><span class="a-arrow">→</span>
+          </a>
+          <a
+            href="https://www.raiku.com/blog/what-are-solanas-execution-limits"
+            target="_blank"
+            class="a-item"
+            data-tags="solana"
+          >
+            <span class="a-title">What Are Solana's Execution Limits?</span
+            ><span class="a-arrow">→</span>
+          </a>
+          <a
+            href="https://www.raiku.com/blog/solana-apps-keep-winning"
+            target="_blank"
+            class="a-item"
+            data-tags="solana defi"
+          >
+            <span class="a-title">Why Do Solana Apps Keep Winning?</span
+            ><span class="a-arrow">→</span>
+          </a>
+          <a
+            href="https://www.raiku.com/blog/accounts-understanding-the-solana-programming-model"
+            target="_blank"
+            class="a-item"
+            data-tags="solana"
+          >
+            <span class="a-title"
+              >Understanding the Solana Programming Model</span
+            ><span class="a-arrow">→</span>
+          </a>
+          <a
+            href="https://www.raiku.com/blog/solana-downtime-solved"
+            target="_blank"
+            class="a-item"
+            data-tags="solana"
+          >
+            <span class="a-title">How Solana Solved Downtime</span
+            ><span class="a-arrow">→</span>
+          </a>
+          <a
+            href="https://www.raiku.com/blog/institutions-have-arrived-on-solana"
+            target="_blank"
+            class="a-item"
+            data-tags="solana tokenization payments"
+          >
+            <span class="a-title">Institutions Have Arrived On Solana</span
+            ><span class="a-arrow">→</span>
+          </a>
+        </div>
+      </div> -->
+
+      <div class="pub fi">
+        <div class="pub-label">Phala Network</div>
+        <div class="a-list">
+          <a
+            href="https://phala.com/posts/Phala-GPU-TEE-Deep-Dive"
+            target="_blank"
+            class="a-item"
+            data-tags="defi"
+          >
+            <span class="a-title"
+              >GPU TEE Deep Dive: Securing AI at the Hardware Layer</span
+            ><span class="a-arrow">→</span>
+          </a>
+          <a
+            href="https://phala.com/posts/what-does-it-take-to-build-safe-agi"
+            target="_blank"
+            class="a-item"
+            data-tags="defi"
+          >
+            <span class="a-title">What Does It Take to Build Safe AGI?</span
+            ><span class="a-arrow">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="pub fi">
+        <div class="pub-label">Independent Research</div>
+        <div class="a-list">
+          <a
+            href="https://app.t2.world/article/cm1dfkb61113363221mc9excti2x"
+            target="_blank"
+            class="a-item"
+            data-tags="l2s"
+          >
+            <span class="a-title"
+              >Not All L2s Prioritize Ethereum's Security Equally!</span
+            ><span class="a-arrow">→</span>
+          </a>
+          <a
+            href="https://app.t2.world/article/cm92zalxf00zm6w1pg5ah31nd"
+            target="_blank"
+            class="a-item"
+            data-tags="l2s"
+          >
+            <span class="a-title"
+              >Rollups, Reality, and the "Secured by Ethereum" Illusion</span
+            ><span class="a-arrow">→</span>
+          </a>
+          <a
+            href="https://mirror.xyz/0x4dc8b342dAe79b0426a05c4fb9d95eD1f9b97144/P0H7f8tSc-WLCthEeEsAeimD-rQ4WE2T94AwfmkcLgU"
+            target="_blank"
+            class="a-item"
+            data-tags="l2s"
+          >
+            <span class="a-title"
+              >Rollup Decentralisation: What Stage Are We Really At?</span
+            ><span class="a-arrow">→</span>
+          </a>
+          <a
+            href="https://mirror.xyz/0x4dc8b342dAe79b0426a05c4fb9d95eD1f9b97144/qe36fcgfuzfFSNnmsRPEo5SCaX94nl5mDgbJPBA-e-g"
+            target="_blank"
+            class="a-item"
+            data-tags="l2s"
+          >
+            <span class="a-title">Are Bitcoin L2s Real?</span
+            ><span class="a-arrow">→</span>
+          </a>
+          <a
+            href="https://mirror.xyz/0x4dc8b342dAe79b0426a05c4fb9d95eD1f9b97144/3-NLGyJ6kytwJu7ewMU-D3KeEB-365Bq0P65pq7iHJ4"
+            target="_blank"
+            class="a-item"
+            data-tags="l2s"
+          >
+            <span class="a-title">Rollup Sequencers</span
+            ><span class="a-arrow">→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <div class="hr"><hr /></div>
+
+    <!-- DIAGRAMS -->
+    <section class="section" id="diagrams">
+      <h2 class="sec-title fi">Diagrams</h2>
+      <div class="grid fi">
+        <div class="d-card" onclick="openLB(this)">
+          <div class="d-img">
+            <img src="assets/Alpenglow.png" alt="Alpenglow" />
+          </div>
+          <div class="d-info">
+            <h4>Alpenglow</h4>
+            <p>Solana's sub-150ms finality upgrade</p>
+          </div>
+        </div>
+        <div class="d-card" onclick="openLB(this)">
+          <div class="d-img">
+            <img src="assets/Basedrollups.png" alt="Based Rollups" />
+          </div>
+          <div class="d-info">
+            <h4>Based Rollups</h4>
+            <p>L1-sequenced rollup architecture</p>
+          </div>
+        </div>
+        <div class="d-card" onclick="openLB(this)">
+          <div class="d-img">
+            <img src="assets/PBSvsMCL.png" alt="PBS vs MCL" />
+          </div>
+          <div class="d-info">
+            <h4>PBS vs MCL</h4>
+            <p>Block building comparison</p>
+          </div>
+        </div>
+        <div class="d-card" onclick="openLB(this)">
+          <div class="d-img">
+            <img src="assets/Solanatxcycle.png" alt="Solana Tx Cycle" />
+          </div>
+          <div class="d-info">
+            <h4>Solana Tx Cycle</h4>
+            <p>Transaction lifecycle on Solana</p>
+          </div>
+        </div>
+        <div class="d-card" onclick="openLB(this)">
+          <div class="d-img"><img src="assets/SPN.png" alt="SPN" /></div>
+          <div class="d-info">
+            <h4>SPN</h4>
+            <p>Succinct Prover Network architecture</p>
+          </div>
+        </div>
+        <div class="d-card" onclick="openLB(this)">
+          <div class="d-img"><img src="assets/ZK.png" alt="ZK" /></div>
+          <div class="d-info">
+            <h4>ZK Proofs</h4>
+            <p>Zero-knowledge proof pipeline</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <div class="cta-wrap fi">
+      <div class="cta">
+        <p>Want to work together?</p>
+        <div class="cta-links">
+          <a href="https://x.com/Ishita_30" target="_blank">DM on X</a>
+          <a href="https://www.linkedin.com/in/ishitarastogii/" target="_blank"
+            >LinkedIn</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>Ishita Rastogi</p>
+      <div class="f-links">
+        <a href="https://x.com/Ishita_30" target="_blank">X ↗</a>
+        <a href="https://www.linkedin.com/in/ishitarastogii/" target="_blank"
+          >LinkedIn ↗</a
+        >
+        <a href="https://github.com/ishitarastogi" target="_blank">GitHub ↗</a>
+        <a href="https://substack.com/@ishitarastogi" target="_blank"
+          >Substack ↗</a
+        >
+      </div>
+    </footer>
+
+    <!-- LIGHTBOX -->
+    <div class="lb" id="lb">
+      <button class="lb-x" onclick="closeLB()">✕</button>
+      <button class="lb-n lb-p" onclick="navLB(-1)">‹</button>
+      <button class="lb-n lb-nxt" onclick="navLB(1)">›</button>
+      <img id="lb-img" src="" alt="" />
+    </div>
+
+    <script>
+      // Ticker hide on scroll
+      const ticker = document.getElementById("ticker-top");
+      const navEl = document.querySelector("nav");
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 60) {
+          ticker.style.transform = "translateY(-100%)";
+          ticker.style.transition = "transform .3s ease";
+          navEl.style.top = "0";
+          navEl.style.transition = "top .3s ease";
+        } else {
+          ticker.style.transform = "translateY(0)";
+          navEl.style.top = "32px";
+        }
+      });
+
+      // Scroll fade
+      const obs = new IntersectionObserver(
+        (es) => {
+          es.forEach((e) => {
+            if (e.isIntersecting) e.target.classList.add("v");
+          });
+        },
+        { threshold: 0.06 }
+      );
+      document.querySelectorAll(".fi").forEach((el) => obs.observe(el));
+
+      // TAG FILTERING
+      const tags = document.querySelectorAll(".tag[data-filter]");
+      const articles = document.querySelectorAll(".a-item[data-tags]");
+      const pubs = document.querySelectorAll(".pub");
+      const notice = document.getElementById("filter-notice");
+      const noticeLabel = document.getElementById("filter-label");
+      let activeFilter = null;
+
+      const filterNames = {
+        payments: "Crypto Payments",
+        stablecoins: "Stablecoins",
+        solana: "Solana",
+        tokenization: "Tokenization",
+        defi: "DeFi",
+        l2s: "L2s",
+      };
+
+      tags.forEach((tag) => {
+        tag.addEventListener("click", () => {
+          const f = tag.dataset.filter;
+
+          if (f === "all" || activeFilter === f) {
+            clearFilter();
+            return;
+          }
+
+          activeFilter = f;
+          tags.forEach((t) => t.classList.remove("active"));
+          tag.classList.add("active");
+
+          // Filter articles
+          articles.forEach((a) => {
+            const t = a.dataset.tags || "";
+            a.classList.toggle("hidden", !t.includes(f));
+          });
+
+          // Hide empty pub groups
+          pubs.forEach((pub) => {
+            const visible = pub.querySelectorAll(".a-item:not(.hidden)");
+            pub.classList.toggle("hidden", visible.length === 0);
+          });
+
+          // Show notice
+          noticeLabel.textContent = filterNames[f] || f;
+          notice.classList.add("show");
+
+          // Scroll to articles
+          document
+            .getElementById("articles")
+            .scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      });
+
+      function clearFilter() {
+        activeFilter = null;
+        tags.forEach((t) => t.classList.remove("active"));
+        articles.forEach((a) => a.classList.remove("hidden"));
+        pubs.forEach((p) => p.classList.remove("hidden"));
+        notice.classList.remove("show");
+      }
+
+      // LIGHTBOX
+      let cards,
+        idx = 0;
+      function gc() {
+        return [...document.querySelectorAll(".d-card")].filter((c) =>
+          c.querySelector("img")
+        );
+      }
+      function openLB(c) {
+        const i = c.querySelector("img");
+        if (!i) return;
+        cards = gc();
+        idx = cards.indexOf(c);
+        if (idx === -1) return;
+        uLB();
+        document.getElementById("lb").classList.add("on");
+        document.body.style.overflow = "hidden";
+      }
+      function uLB() {
+        const c = cards[idx];
+        if (!c) return;
+        document.getElementById("lb-img").src = c.querySelector("img").src;
+      }
+      function closeLB() {
+        document.getElementById("lb").classList.remove("on");
+        document.body.style.overflow = "";
+      }
+      function navLB(d) {
+        if (!cards || !cards.length) return;
+        idx = (idx + d + cards.length) % cards.length;
+        uLB();
+      }
+      document.addEventListener("keydown", (e) => {
+        if (!document.getElementById("lb").classList.contains("on")) return;
+        if (e.key === "Escape") closeLB();
+        if (e.key === "ArrowLeft") navLB(-1);
+        if (e.key === "ArrowRight") navLB(1);
+      });
+      document.getElementById("lb").addEventListener("click", (e) => {
+        if (e.target === document.getElementById("lb")) closeLB();
+      });
+    </script>
+  </body>
+</html>
