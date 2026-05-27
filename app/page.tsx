@@ -3,8 +3,6 @@
 import { useState, useEffect } from "react";
 import PortfolioHero from "@/components/ui/portfolio-hero";
 
-// ─── Data ────────────────────────────────────────────────────────────────────
-
 const experience = [
   { company: "Hazeflow", role: "Research Analyst", current: true },
   { company: "Gelato Network", role: "Technical Writer" },
@@ -210,7 +208,7 @@ const publications = [
 ];
 
 const diagrams = [
-  { file: "Alpenglow.png", title: "Alpenglow", desc: "Solana's sub-150ms finality upgrade" },
+  { file: "Alpenglow.png", title: "Alpenglow", desc: "Solana sub-150ms finality upgrade" },
   { file: "Basedrollups.png", title: "Based Rollups", desc: "L1-sequenced rollup architecture" },
   { file: "PBSvsMCL.png", title: "PBS vs MCL", desc: "Block building comparison" },
   { file: "Solanatxcycle.png", title: "Solana Tx Cycle", desc: "Transaction lifecycle on Solana" },
@@ -227,14 +225,11 @@ const filterOptions = [
   { label: "L2s", value: "l2s" },
 ];
 
-// ─── Page ─────────────────────────────────────────────────────────────────────
-
 export default function Page() {
   const [activeFilter, setActiveFilter] = useState(null as string | null);
   const [lbOpen, setLbOpen] = useState(false);
   const [lbIdx, setLbIdx] = useState(0);
 
-  // Scroll-reveal for sections below hero
   useEffect(() => {
     const obs = new IntersectionObserver(
       (entries) => {
@@ -248,13 +243,11 @@ export default function Page() {
     return () => obs.disconnect();
   }, []);
 
-  // Lightbox keyboard
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (!lbOpen) return;
       if (e.key === "Escape") setLbOpen(false);
-      if (e.key === "ArrowLeft")
-        setLbIdx((i) => (i - 1 + diagrams.length) % diagrams.length);
+      if (e.key === "ArrowLeft") setLbIdx((i) => (i - 1 + diagrams.length) % diagrams.length);
       if (e.key === "ArrowRight") setLbIdx((i) => (i + 1) % diagrams.length);
     };
     document.addEventListener("keydown", onKey);
@@ -270,66 +263,40 @@ export default function Page() {
     setLbOpen(true);
   };
 
-  // Filtered articles
   const filteredPubs = activeFilter
     ? publications
         .map((pub) => ({
           ...pub,
-          items: pub.items.filter((item) =>
-            item.tags.includes(activeFilter as string)
-          ),
+          items: pub.items.filter((item) => item.tags.includes(activeFilter as string)),
         }))
         .filter((pub) => pub.items.length > 0)
     : publications;
 
   return (
     <>
-      {/* Hero */}
       <PortfolioHero />
 
-      {/* Experience */}
-      <section
-        id="about"
-        className="max-w-[880px] mx-auto px-7 pt-16 pb-12"
-        style={{ scrollMarginTop: "80px" }}
-      >
-        <p
-          className="text-[0.84rem] font-medium mb-2.5"
-          style={{ color: "var(--warm)" }}
-        >
+      <section id="about" className="max-w-[880px] mx-auto px-7 pt-16 pb-12" style={{ scrollMarginTop: "80px" }}>
+        <p className="text-[0.84rem] font-medium mb-2.5" style={{ color: "var(--warm)" }}>
           hey, i&apos;m ishita
         </p>
-        <h1
-          className="font-serif text-[clamp(1.9rem,4vw,2.8rem)] font-normal leading-[1.15] tracking-[-0.01em] max-w-[560px]"
-          style={{ color: "var(--ink)" }}
-        >
-          I write about crypto payments, stablecoins &{" "}
-          <em className="italic">Solana.</em>
+        <h1 className="font-serif text-[clamp(1.9rem,4vw,2.8rem)] font-normal leading-[1.15] tracking-[-0.01em] max-w-[560px]" style={{ color: "var(--ink)" }}>
+          I write about crypto payments, stablecoins & <em className="italic">Solana.</em>
         </h1>
-        <p
-          className="mt-4 text-[0.9rem] font-light max-w-[440px] leading-[1.6]"
-          style={{ color: "var(--sub)" }}
-        >
-          Research Analyst exploring how crypto rails are replacing traditional
-          finance, from stablecoin settlements to tokenized assets.
+        <p className="mt-4 text-[0.9rem] font-light max-w-[440px] leading-[1.6]" style={{ color: "var(--sub)" }}>
+          Research Analyst exploring how crypto rails are replacing traditional finance, from stablecoin settlements to tokenized assets.
         </p>
 
-        {/* Filter Tags */}
         <div className="mt-5 flex gap-2 flex-wrap">
           {filterOptions.map((f) => (
             <button
               key={f.value}
-              onClick={() =>
-                setActiveFilter(activeFilter === f.value ? null : f.value)
-              }
+              onClick={() => setActiveFilter(activeFilter === f.value ? null : f.value)}
               className="text-[0.7rem] font-medium px-[11px] py-[4px] rounded-[14px] border-[1.5px] cursor-pointer transition-all duration-200 select-none"
               style={{
-                color:
-                  activeFilter === f.value ? "var(--bg)" : "var(--sub)",
-                background:
-                  activeFilter === f.value ? "var(--ink)" : "var(--tag-bg)",
-                borderColor:
-                  activeFilter === f.value ? "var(--ink)" : "transparent",
+                color: activeFilter === f.value ? "var(--bg)" : "var(--sub)",
+                background: activeFilter === f.value ? "var(--ink)" : "var(--tag-bg)",
+                borderColor: activeFilter === f.value ? "var(--ink)" : "transparent",
               }}
             >
               {f.label}
@@ -346,12 +313,8 @@ export default function Page() {
           )}
         </div>
 
-        {/* Experience Cards */}
         <div className="mt-9">
-          <div
-            className="text-[0.62rem] font-semibold tracking-[0.1em] uppercase mb-3"
-            style={{ color: "var(--muted)" }}
-          >
+          <div className="text-[0.62rem] font-semibold tracking-[0.1em] uppercase mb-3" style={{ color: "var(--muted)" }}>
             Where I&apos;ve worked
           </div>
           <div className="flex gap-2.5 flex-wrap">
@@ -359,43 +322,21 @@ export default function Page() {
               <div
                 key={exp.company}
                 className="flex-1 min-w-[160px] rounded-xl p-4 relative overflow-hidden transition-all duration-200 hover:-translate-y-0.5"
-                style={{
-                  background: "var(--card)",
-                  border: "1px solid var(--border)",
-                  boxShadow: "0 0 0 transparent",
-                }}
+                style={{ background: "var(--card)", border: "1px solid var(--border)", boxShadow: "0 0 0 transparent" }}
                 onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLElement).style.boxShadow =
-                    "0 6px 18px rgba(0,0,0,0.06)";
+                  (e.currentTarget as HTMLElement).style.boxShadow = "0 6px 18px rgba(0,0,0,0.06)";
                 }}
                 onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLElement).style.boxShadow =
-                    "0 0 0 transparent";
+                  (e.currentTarget as HTMLElement).style.boxShadow = "0 0 0 transparent";
                 }}
               >
-                <div
-                  className="absolute top-0 left-0 right-0 h-[3px] rounded-t-xl"
-                  style={{ background: "var(--warm)" }}
-                />
-                <div
-                  className="text-[0.9rem] font-semibold"
-                  style={{ color: "var(--ink)" }}
-                >
-                  {exp.company}
-                </div>
-                <div
-                  className="text-[0.74rem]"
-                  style={{ color: "var(--sub)" }}
-                >
-                  {exp.role}
-                </div>
+                <div className="absolute top-0 left-0 right-0 h-[3px] rounded-t-xl" style={{ background: "var(--warm)" }} />
+                <div className="text-[0.9rem] font-semibold" style={{ color: "var(--ink)" }}>{exp.company}</div>
+                <div className="text-[0.74rem]" style={{ color: "var(--sub)" }}>{exp.role}</div>
                 {exp.current && (
                   <span
                     className="inline-block text-[0.58rem] font-semibold tracking-[0.06em] uppercase px-[7px] py-[2px] rounded-[4px] mt-1.5"
-                    style={{
-                      color: "var(--warm)",
-                      background: "rgba(196,149,106,0.1)",
-                    }}
+                    style={{ color: "var(--warm)", background: "rgba(196,149,106,0.1)" }}
                   >
                     current
                   </span>
@@ -406,37 +347,22 @@ export default function Page() {
         </div>
       </section>
 
-      {/* Divider */}
       <div className="max-w-[880px] mx-auto px-7">
         <hr style={{ border: "none", height: "1px", background: "var(--border)" }} />
       </div>
 
-      {/* Articles */}
-      <section
-        id="articles"
-        className="max-w-[880px] mx-auto px-7 py-12"
-        style={{ scrollMarginTop: "80px" }}
-      >
-        <h2
-          className="fi font-serif text-[1.4rem] font-normal mb-7"
-          style={{ color: "var(--ink)" }}
-        >
+      <section id="articles" className="max-w-[880px] mx-auto px-7 py-12" style={{ scrollMarginTop: "80px" }}>
+        <h2 className="fi font-serif text-[1.4rem] font-normal mb-7" style={{ color: "var(--ink)" }}>
           Writing
         </h2>
 
         {activeFilter && (
           <div
             className="flex items-center justify-between mb-5 px-3.5 py-2.5 rounded-lg text-[0.78rem]"
-            style={{
-              background: "rgba(196,149,106,0.08)",
-              color: "var(--sub)",
-            }}
+            style={{ background: "rgba(196,149,106,0.08)", color: "var(--sub)" }}
           >
             <span>
-              Filtering by:{" "}
-              <strong>
-                {filterOptions.find((f) => f.value === activeFilter)?.label}
-              </strong>
+              Filtering by: <strong>{filterOptions.find((f) => f.value === activeFilter)?.label}</strong>
             </span>
             <button
               onClick={() => setActiveFilter(null)}
@@ -452,10 +378,7 @@ export default function Page() {
           <div key={pub.publisher} className="fi mb-8 last:mb-0">
             <div
               className="text-[0.64rem] font-semibold tracking-[0.1em] uppercase mb-2 pb-1.5 border-b"
-              style={{
-                color: "var(--muted)",
-                borderColor: "var(--border-light)",
-              }}
+              style={{ color: "var(--muted)", borderColor: "var(--border-light)" }}
             >
               {pub.publisher}
             </div>
@@ -469,29 +392,22 @@ export default function Page() {
                   className="group flex items-baseline justify-between gap-3 px-2.5 py-2 rounded-md no-underline transition-all duration-200"
                   style={{ color: "inherit" }}
                   onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLElement).style.background =
-                      "var(--card)";
-                    (e.currentTarget as HTMLElement).style.transform =
-                      "translateX(3px)";
+                    (e.currentTarget as HTMLElement).style.background = "var(--card)";
+                    (e.currentTarget as HTMLElement).style.transform = "translateX(3px)";
                   }}
                   onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLElement).style.background =
-                      "transparent";
-                    (e.currentTarget as HTMLElement).style.transform =
-                      "translateX(0)";
+                    (e.currentTarget as HTMLElement).style.background = "transparent";
+                    (e.currentTarget as HTMLElement).style.transform = "translateX(0)";
                   }}
                 >
-                  <span
-                    className="font-serif text-[0.96rem] font-normal leading-[1.35] flex-1"
-                    style={{ color: "var(--ink)" }}
-                  >
+                  <span className="font-serif text-[0.96rem] font-normal leading-[1.35] flex-1" style={{ color: "var(--ink)" }}>
                     {item.title}
                   </span>
                   <span
                     className="text-[0.78rem] opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition-all duration-200"
                     style={{ color: "var(--muted)" }}
                   >
-                    →
+                    {">"}
                   </span>
                 </a>
               ))}
@@ -500,21 +416,12 @@ export default function Page() {
         ))}
       </section>
 
-      {/* Divider */}
       <div className="max-w-[880px] mx-auto px-7">
         <hr style={{ border: "none", height: "1px", background: "var(--border)" }} />
       </div>
 
-      {/* Diagrams */}
-      <section
-        id="diagrams"
-        className="max-w-[880px] mx-auto px-7 py-12"
-        style={{ scrollMarginTop: "80px" }}
-      >
-        <h2
-          className="fi font-serif text-[1.4rem] font-normal mb-7"
-          style={{ color: "var(--ink)" }}
-        >
+      <section id="diagrams" className="max-w-[880px] mx-auto px-7 py-12" style={{ scrollMarginTop: "80px" }}>
+        <h2 className="fi font-serif text-[1.4rem] font-normal mb-7" style={{ color: "var(--ink)" }}>
           Diagrams
         </h2>
         <div className="fi grid grid-cols-1 sm:grid-cols-2 gap-3.5">
@@ -523,33 +430,19 @@ export default function Page() {
               key={d.file}
               onClick={() => openLB(i)}
               className="group text-left rounded-[10px] overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-0.5"
-              style={{
-                background: "var(--card)",
-                border: "1px solid rgba(0,0,0,0.05)",
-              }}
+              style={{ background: "var(--card)", border: "1px solid rgba(0,0,0,0.05)" }}
               onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.boxShadow =
-                  "0 5px 16px rgba(0,0,0,0.06)";
+                (e.currentTarget as HTMLElement).style.boxShadow = "0 5px 16px rgba(0,0,0,0.06)";
               }}
               onMouseLeave={(e) => {
                 (e.currentTarget as HTMLElement).style.boxShadow = "none";
               }}
             >
-              <div
-                className="aspect-[16/10] overflow-hidden flex items-center justify-center"
-                style={{ background: "var(--tag-bg)" }}
-              >
-                <img
-                  src={`/assets/${d.file}`}
-                  alt={d.title}
-                  className="w-full h-full object-cover transition-transform duration-400 group-hover:scale-[1.03]"
-                />
+              <div className="aspect-[16/10] overflow-hidden flex items-center justify-center" style={{ background: "var(--tag-bg)" }}>
+                <img src={`/assets/${d.file}`} alt={d.title} className="w-full h-full object-cover transition-transform duration-400 group-hover:scale-[1.03]" />
               </div>
               <div className="px-3 py-2.5">
-                <h4
-                  className="font-serif text-[0.88rem] font-normal leading-[1.3]"
-                  style={{ color: "var(--ink)" }}
-                >
+                <h4 className="font-serif text-[0.88rem] font-normal leading-[1.3]" style={{ color: "var(--ink)" }}>
                   {d.title}
                 </h4>
                 <p className="text-[0.7rem] mt-0.5" style={{ color: "var(--muted)" }}>
@@ -561,25 +454,15 @@ export default function Page() {
         </div>
       </section>
 
-      {/* CTA */}
       <div id="contact" className="max-w-[880px] mx-auto px-7 pb-12 fi" style={{ scrollMarginTop: "80px" }}>
-        <div
-          className="rounded-[10px] px-7 py-6 flex items-center justify-between gap-4 flex-wrap"
-          style={{ background: "var(--ink)" }}
-        >
-          <p
-            className="font-serif text-[1.05rem]"
-            style={{ color: "var(--bg)" }}
-          >
+        <div className="rounded-[10px] px-7 py-6 flex items-center justify-between gap-4 flex-wrap" style={{ background: "var(--ink)" }}>
+          <p className="font-serif text-[1.05rem]" style={{ color: "var(--bg)" }}>
             Want to work together?
           </p>
           <div className="flex gap-2">
             {[
               { label: "DM on X", href: "https://x.com/Ishita_30" },
-              {
-                label: "LinkedIn",
-                href: "https://www.linkedin.com/in/ishitarastogii/",
-              },
+              { label: "LinkedIn", href: "https://www.linkedin.com/in/ishitarastogii/" },
             ].map((l) => (
               
                 key={l.label}
@@ -587,10 +470,7 @@ export default function Page() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-3.5 py-1.5 text-[0.74rem] font-medium rounded-[5px] no-underline transition-all duration-200 hover:bg-white/10"
-                style={{
-                  color: "var(--bg)",
-                  border: "1px solid rgba(255,255,255,0.16)",
-                }}
+                style={{ color: "var(--bg)", border: "1px solid rgba(255,255,255,0.16)" }}
               >
                 {l.label}
               </a>
@@ -599,7 +479,6 @@ export default function Page() {
         </div>
       </div>
 
-      {/* Footer */}
       <footer
         className="max-w-[880px] mx-auto px-7 pt-6 pb-11 flex items-center justify-between border-t flex-wrap gap-3"
         style={{ borderColor: "var(--border)" }}
@@ -628,13 +507,12 @@ export default function Page() {
                 (e.currentTarget as HTMLElement).style.color = "var(--sub)";
               }}
             >
-              {l.label} ↗
+              {l.label}
             </a>
           ))}
         </div>
       </footer>
 
-      {/* Lightbox */}
       {lbOpen && (
         <div
           className="fixed inset-0 z-[200] flex items-center justify-center px-11"
@@ -648,29 +526,21 @@ export default function Page() {
             className="absolute top-4 right-5 w-[34px] h-[34px] rounded-full flex items-center justify-center text-white text-[0.95rem] transition-colors duration-200 hover:bg-white/15"
             style={{ background: "rgba(255,255,255,0.07)" }}
           >
-            ✕
+            X
           </button>
           <button
-            onClick={() =>
-              setLbIdx((i) => (i - 1 + diagrams.length) % diagrams.length)
-            }
+            onClick={() => setLbIdx((i) => (i - 1 + diagrams.length) % diagrams.length)}
             className="absolute left-[18px] top-1/2 -translate-y-1/2 w-10 h-10 rounded-full flex items-center justify-center text-xl transition-all duration-200 hover:bg-white/10"
-            style={{
-              background: "rgba(255,255,255,0.05)",
-              color: "rgba(255,255,255,0.55)",
-            }}
+            style={{ background: "rgba(255,255,255,0.05)", color: "rgba(255,255,255,0.55)" }}
           >
-            ‹
+            {"<"}
           </button>
           <button
             onClick={() => setLbIdx((i) => (i + 1) % diagrams.length)}
             className="absolute right-[18px] top-1/2 -translate-y-1/2 w-10 h-10 rounded-full flex items-center justify-center text-xl transition-all duration-200 hover:bg-white/10"
-            style={{
-              background: "rgba(255,255,255,0.05)",
-              color: "rgba(255,255,255,0.55)",
-            }}
+            style={{ background: "rgba(255,255,255,0.05)", color: "rgba(255,255,255,0.55)" }}
           >
-            ›
+            {">"}
           </button>
           <img
             src={`/assets/${diagrams[lbIdx].file}`}
