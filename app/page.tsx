@@ -53,6 +53,116 @@ const publications = [
     ],
   },
   {
+    publisher: "Raiku",
+    items: [
+      {
+        title: "Issues with Existing LSTs",
+        href: "https://x.com/raikucom/status/2058907590143119729?s=20",
+        tags: ["solana", "defi"],
+      },
+      {
+        title: "Reading Faster: How RPC 2.0 is Jumpstarting the Next Race on Solana",
+        href: "https://x.com/raikucom/status/2056369015811915806?s=20",
+        tags: ["solana"],
+      },
+      {
+        title: "RPC 2.0 Part 1: Why Is Reading So Hard? (Solana Edition)",
+        href: "https://x.com/raikucom/status/2053844718673359072?s=20",
+        tags: ["solana"],
+      },
+      {
+        title: "propAMM vs Orderbook",
+        href: "https://x.com/raikucom/status/2051310553558106483?s=20",
+        tags: ["solana", "defi"],
+      },
+      {
+        title: "Why MEV is a Cat and Mouse Game",
+        href: "https://x.com/raikucom/status/2046218193148981587?s=20",
+        tags: ["solana", "defi"],
+      },
+      {
+        title: "The $20B Question: Wen Perps?",
+        href: "https://x.com/raikucom/status/2043685702882198000?s=20",
+        tags: ["solana", "defi"],
+      },
+      {
+        title: "MEV: How do Validators and RPCs Earn from it? (Part 3)",
+        href: "https://x.com/raikucom/status/2038619261606748560?s=20",
+        tags: ["solana", "defi"],
+      },
+      {
+        title: "MEV: What's a Searcher? (Part 2)",
+        href: "https://x.com/raikucom/status/2036066517394034795?s=20",
+        tags: ["solana", "defi"],
+      },
+      {
+        title: "MEV: What is it and Why Should You Care? (Part 1)",
+        href: "https://x.com/raikucom/status/2033528755709186238?s=20",
+        tags: ["solana", "defi"],
+      },
+      {
+        title: "Are Solana Validators Profitable?",
+        href: "https://x.com/raikucom/status/2031024285360251195?s=20",
+        tags: ["solana"],
+      },
+      {
+        title: "Staking and LSTs",
+        href: "https://x.com/raikucom/status/2028519410223235114?s=20",
+        tags: ["solana", "defi"],
+      },
+      {
+        title: "How to Choose an RPC",
+        href: "https://x.com/raikucom/status/2026054794331443387?s=20",
+        tags: ["solana"],
+      },
+      {
+        title: "MCL vs PBS",
+        href: "https://x.com/raikucom/status/2023553655626998080?s=20",
+        tags: ["solana"],
+      },
+      {
+        title: "Solana Will Beat TradFi",
+        href: "https://x.com/raikucom/status/2020965984237224423?s=20",
+        tags: ["solana"],
+      },
+      {
+        title: "Alpenglow: The Solana Upgrade That Rivals NASDAQ",
+        href: "https://x.com/raikucom/status/2018360253641863244?s=20",
+        tags: ["solana"],
+      },
+      {
+        title: "What are Solana's Execution Limits?",
+        href: "https://x.com/raikucom/status/2015812917921280466",
+        tags: ["solana"],
+      },
+      {
+        title: "How Are Solana Fees So Gosh-Dang Cheap?",
+        href: "https://x.com/raikucom/status/2013280488622862443",
+        tags: ["solana"],
+      },
+      {
+        title: "Why Do Solana Apps Keep Winning?",
+        href: "https://x.com/raikucom/status/2010728528749252912",
+        tags: ["solana"],
+      },
+      {
+        title: "What's In Your Account: Understanding The Solana Programming Model",
+        href: "https://x.com/raikucom/status/2000931378339152154",
+        tags: ["solana"],
+      },
+      {
+        title: "Institutions Are Here",
+        href: "https://x.com/raikucom/status/1998030687786463529",
+        tags: ["solana"],
+      },
+      {
+        title: "Downtime is a Meme",
+        href: "https://x.com/raikucom/status/1995538734935150940",
+        tags: ["solana"],
+      },
+    ],
+  },
+  {
     publisher: "Phala Network",
     items: [
       {
@@ -375,7 +485,7 @@ export default function Page() {
             </div>
             <div className="flex flex-col gap-px">
               {pub.items.map((item) => (
-                <a
+                
                   key={item.href}
                   href={item.href}
                   target="_blank"
@@ -495,7 +605,7 @@ export default function Page() {
                 href: "https://www.linkedin.com/in/ishitarastogii/",
               },
             ].map((l) => (
-              <a
+              
                 key={l.label}
                 href={l.href}
                 target="_blank"
@@ -537,7 +647,7 @@ export default function Page() {
               href: "https://substack.com/@ishitarastogi",
             },
           ].map((l) => (
-            <a
+            
               key={l.label}
               href={l.href}
               target="_blank"
