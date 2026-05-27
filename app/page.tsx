@@ -383,9 +383,8 @@ export default function Page() {
               {pub.publisher}
             </div>
             <div className="flex flex-col gap-px">
-              {pub.items.map((item) => (
-                
-                  key={item.href}
+              {{pub.items.map((item) => (
+                <a key={item.href}
                   href={item.href}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -465,7 +464,7 @@ export default function Page() {
               { label: "LinkedIn", href: "https://www.linkedin.com/in/ishitarastogii/" },
             ].map((l) => (
               
-                key={l.label}
+               <a key={l.label}
                 href={l.href}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -492,9 +491,8 @@ export default function Page() {
             { label: "LinkedIn", href: "https://www.linkedin.com/in/ishitarastogii/" },
             { label: "GitHub", href: "https://github.com/ishitarastogi" },
             { label: "Substack", href: "https://substack.com/@ishitarastogi" },
-          ].map((l) => (
-            
-              key={l.label}
+         ].map((l) => (
+            <a key={l.label}
               href={l.href}
               target="_blank"
               rel="noopener noreferrer"
