@@ -267,7 +267,7 @@ export default function Page() {
     ? publications
         .map((pub) => ({
           ...pub,
-          items: pub.items.filter((item) => item.tags.includes(activeFilter as string)),
+          items: pub.items.filter((item) => activeFilter ? item.tags.includes(activeFilter) : true),
         }))
         .filter((pub) => pub.items.length > 0)
     : publications;
